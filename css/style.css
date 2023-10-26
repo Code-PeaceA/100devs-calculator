@@ -1,0 +1,104 @@
+/* Box Model Hack */
+* {
+     box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+     content: ".";
+     display: block;
+     clear: both;
+     visibility: hidden;
+     line-height: 0;
+     height: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+html {
+     font-size: 20px;
+}
+
+
+body {
+     font-family: 'Roboto', sans-serif;
+}
+
+
+
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+header {
+
+}
+
+footer {
+
+}
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+
+main .body {
+     background-color: black;
+     margin: 50px auto;
+     width: 500px;
+     height: 700px;
+     border-radius: 50px;
+     display: flex;
+     flex-direction: column;
+}
+
+main .container {
+     margin: 10% auto;
+     height: 100%;
+     width: 100%;
+}
+
+main .outputContainer {
+     background-color: aliceblue;
+     width: 80%;
+     height: 20%;
+     margin: 10% auto 5% auto;
+     border: 3px solid azure;
+     display: flex;
+     align-items: flex-end;
+     justify-content: flex-end;
+}
+
+main .outputContainer .output {
+     width: 95%;
+     height: 40%;
+     text-align: right;
+     font-size: 1.8em;
+}
+
+main .inputContainer {
+     width: 80%;
+     height: 40%;
+     margin: 10% auto auto;
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-around;
+     gap: 10px;
+}
+
+main .inputContainer .button {
+     display: inline-block;
+     background-color: aliceblue;
+     width: 80px;
+     height: 80px;
+     border-radius: 50px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-size: 1.5em;
+}
