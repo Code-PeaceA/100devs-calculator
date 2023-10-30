@@ -1,54 +1,3 @@
-/*
-
-// Declare variable for calculator output
-const screen = {};
-screen.output = document.getElementById('output');
-screen.memory = "";
-// console.log(screen);
-
-// Declare variables for calculator inputs and add event listeners
-// Numbers
-const numbers = {};
-numbers.num0Button = document.getElementById('num0');
-numbers.num0 = this.num0Button.value;
-numbers.num1Button = document.getElementById('num1');
-numbers.num2Button = document.getElementById('num2');
-numbers.num3Button = document.getElementById('num3');
-numbers.num4Button = document.getElementById('num4');
-numbers.num5Button = document.getElementById('num5');
-numbers.num6Button = document.getElementById('num6');
-numbers.num7Button = document.getElementById('num7');
-numbers.num8Button = document.getElementById('num8');
-numbers.num9Button = document.getElementById('num9');
-console.log(numbers);
-// Operators
-const operators = {};
-operators.divideButton = document.getElementById('divide');
-operators.multiplyButton = document.getElementById('multiply');
-operators.addButton = document.getElementById('add');
-operators.decimalButton = document.getElementById('decimal');
-operators.equalsButton = document.getElementById('equals');
-operators.subtractButton = document.getElementById('subtract');
-// console.log(operators);
-
-*/
-
-/*
-When inputs are clicked (except equals):
-    value should be concatenated in output but reset when an operator input is clicked
-    value should be concatenated to memory
-*/
-
-/* 
-When equals input is clicked:
-    create result variable
-    result should be evaluation of concatenated memory
-    output should show result
-    then memory should reset
-*/
-
-
-
 // Output
 const output = document.getElementById('output');
 output.innerText = "";
@@ -78,29 +27,74 @@ const operatorInputs = [divideButton, multiplyButton, addButton, decimalButton, 
 
 // Memory
 let memory = "";
+let result;
 
-// Output and memory concatenating numbers on click
-numberInputs.map(input => {
-    input.addEventListener('click', addToMemoryAndShowInOutput)
+function calculatorStart(){
 
-    function addToMemoryAndShowInOutput() {
-        output.innerText += input.innerText;
-        memory += input.innerText;
+    // Output and memory concatenating numbers on click
+    numberInputs.map(input => {
+        input.addEventListener('click', addToMemoryAndShowInOutput)
+
+        output.innerText = ""
+
+        function addToMemoryAndShowInOutput() {
+            output.innerText += input.innerText;
+            memory += input.innerText;
+        }
+    })
+
+    // Memory concatenating operators on click
+    operatorInputs.map(input => {
+        input.addEventListener('click', evaluate)
+
+        function evaluate() {
+            input === divideButton ? divideButton.innerText = "/" :
+            input === multiplyButton ? multiplyButton.innerText = "*" :
+            input === subtractButton ? subtractButton.innerText = "-" :
+            input.innerText;
+
+            input !== equalsButton ? 
+            memory += input.innerText :
+            result = eval?.(`"use strict";(${memory})`);
+        }
+    })
+
+    // Show result in output when equals is clicked
+    equalsButton.addEventListener('click', showResults);
+
+    function showResults() {
+        output.innerText = result;
     }
-})
 
-// Memory concatenating operators on click
-operatorInputs.map(input => {
-    input.addEventListener('click', addToMemory)
-    function addToMemory() {
-        input !== equalsButton ?
-        memory += input.innerText :
-        memory = eval(memory)
-        output.innerText = eval(memory);
-    }
+    // Output reset when operator is clicked and another number is clicked
+    operatorInputs.map(input => {
+        input.addEventListener('click', triggerOutputReset);
 
-   
-})
+        function triggerOutputReset() {
+            numberInputs.map(input => {
+                input.addEventListener('click', outputReset);
+            
+                function outputReset() {
+                    output.innerText = input.innerText;
+                }
+            })
+        }
+    })
 
+}
 
+// Memory reset when another button is clicked after reset
 
+equalsButton.addEventListener('click', triggerMemoryReset)
+
+function triggerMemoryReset() {
+    numberInputs.map(input => {
+        input.addEventListener('click', memoryReset);
+    
+        function memoryReset() {
+            memory = input.innerText;
+        }
+    })
+}
+
+calculatorStart();
