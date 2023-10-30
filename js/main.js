@@ -78,6 +78,7 @@ function calculatorStart(){
                     output.innerText = input.innerText;
                 }
             })
+            
         }
     })
 
